@@ -4,7 +4,7 @@ void Matrix_mul(Matrix* out, Matrix* a, Matrix* b, int rowa, int cola, int colb)
   for(unsigned int i = 0; i < rowa; i++){
     for(unsigned int k = 0; k < colb; k++){
       out->elements[4*i + k] = 0;
-      for(unsinged int j = 0; j < cola; j++){
+      for(unsigned int j = 0; j < cola; j++){
         out->elements[4*i + k] += fxp_mul(a->elements[4* i + j], b->elements[4*j + k]);
       }
     }
