@@ -5,11 +5,11 @@ typedef struct {
     fxp32_16 elements[16];
 } Matrix;
 
-void Matrix_mul(Matrix* out, Matrix* a, Matrix* b);
-void Matrix_add(Matrix* out, Matrix* a, Matrix* b);//Is safe to use destructively
-void Matrix_neg(Matrix* out, Matrix* in);
+void Matrix_mul(Matrix* out, Matrix* a, Matrix* b, int rowa, int cola, int colb);
+void Matrix_add(Matrix* out, Matrix* a, Matrix* b, int rows, int cols);//Is safe to use destructively
+void Matrix_neg(Matrix* out, Matrix* in, int rows, int cols);
 
-void Matrix_rotation(Matrix* out, Vector* axis, fxp32_16 angle);
+void Matrix_rotate(Matrix* out, fxp32_16 angle, char axis);
 //void Matrix_reflect(Matrix* out, Vector* line, fxp32_16 bias);
 void Matrix_translate(Matrix* out, Vector* path);
 //void Matrix_shear(Matrix* out, Vector* newX, Vector* newY, Vector* newZ);

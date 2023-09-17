@@ -19,9 +19,12 @@ void Matrix_2DScreenProj(Matrix* projMatrix, Vector* cameraOrientation, Vector* 
 
   // p = rx * ry * rz * t
 
-  Matrix_mul(projMatrix, &rz, &t);
-  Matrix_mul(&t, &ry, projMatrix);
-  Matrix_mul(&rz, &rx, &t);
+  Matrix_mul(projMatrix, &rz, &t, 4,4,4);
+  Matrix_mul(&t, &ry, projMatrix,4,4,4);
+  Matrix_mul(&rz, &rx, &t,4,4,4);
+
+  Matrix* k = (Matrix*)cameraTransform;
+  Matrix_mul(projMatrix, cameraTransform, &rz, 3, 4, 4);
 
   for(int i = 0; i < 16; i++){
     projMatrix->elements[i] = rz.elements[i];
