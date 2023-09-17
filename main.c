@@ -15,14 +15,14 @@ int main()
     scanf("%d", &hei);
 
     Vector points[8];
-    Vector_init(&(points[0]), 0,0,0,1);
-    Vector_init(&(points[1]), len,0,0,1);
-    Vector_init(&(points[2]), 0,wid,0,1);
-    Vector_init(&(points[3]), 0,0,hei,1);
-    Vector_init(&(points[4]), len,wid,0,1);
-    Vector_init(&(points[5]), len,0,hei,1);
-    Vector_init(&(points[6]), 0,wid,hei,1);
-    Vector_init(&(points[7]), len,wid,hei,1);
+    Vector_init(&(points[0]), 0,0,0,65536);
+    Vector_init(&(points[1]), 65536*len,0,0,1);
+    Vector_init(&(points[2]), 0,wid << 16,0,1<16);
+    Vector_init(&(points[3]), 0,0,hei<<16,1<<16);
+    Vector_init(&(points[4]), len<<16,wid<<16,0,1<<16);
+    Vector_init(&(points[5]), len<<16,0,hei<<16,1<<16);
+    Vector_init(&(points[6]), 0,wid<<16,hei<<16,1<<16);
+    Vector_init(&(points[7]), len<<16,wid<<16,hei<<16,1<<16);
     //setup camera details.
     Vector orientation, position;
     Vector_init(&orientation, 0, 32768, 0, 1);
