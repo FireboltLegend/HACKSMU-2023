@@ -37,6 +37,10 @@ int main()
     Matrix_rotate(&rotation, 32768/4, 2);
 
     for(int i = 0; i < 8; i++){
+        Matrix_apply(&rotation, &rotation, &points[i]);
+    }
+
+    for(int i = 0; i < 8; i++){
         //normalize points:
         fxp_div(points[i].a[0], points[i].a[3]);
         fxp_div(points[i].a[1], points[i].a[3]);
