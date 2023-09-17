@@ -34,7 +34,7 @@ int main()
     //rotate points:
 
     Matrix rotation;
-    Matrix_rotation(&rotation, 32768/4, 2);
+    Matrix_rotate(&rotation, 32768/4, 2);
 
     for(int i = 0; i < 8; i++){
         //normalize points:
