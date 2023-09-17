@@ -8,11 +8,11 @@ int main()
 {
     int len, wid, hei;
     printf("Enter Length of Cuboid: ");
-    scanf("%d", len);
+    scanf("%d", &len);
     printf("Enter Width of Cuboid: ");
-    scanf("%d", wid);
+    scanf("%d", &wid);
     printf("Enter Height of Cuboid: ");
-    scanf("%d", hei);
+    scanf("%d", &hei);
 
     Vector points[8];
     Vector_init(&(points[0]), 0,0,0,1);
@@ -36,6 +36,17 @@ int main()
     Matrix rotation;
     Matrix_rotation(&rotation, 32768/4, 2);
 
+    for(int i = 0; i < length(points); i++){
+        //normalize points:
+        fxp_div(points[i].a[0], points[i].a[3]);
+        fxp_div(points[i].a[1], points[i].a[3]);
+        fxp_div(points[i].a[2], points[i].a[3]);
+        fxp_div(points[i].a[3], points[i].a[3]);
+
+
+        printf("(%d, %d, %d)\n", points[i].a[0], points[i].a[1], points[i].a[2]);
+    }
+    
     return 0;
     
 }
