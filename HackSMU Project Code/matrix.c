@@ -22,8 +22,41 @@ void Matrix_neg(Matrix* out, Matrix* in, int rows, int cols){
       out->elements[4*i + j] = -(in->elements[4*i+j]);
 }
 
-void Matrix_rotation(Matrix* out, Vector* axis, fxp32_16 angle){
+//void Matrix_rotationAroundAxis(Matrix* out, Vector* axis, fxp32_16 angle){}
 
+void Matrix_rotate(Matrix* out, fxp32_16 angle, char axis){
+  for(int i = 0; i < 4; i++){
+    for(int j = 0; j < 4; j++){
+      if(i == j){
+        out->elements[4*i + j] = 65536;
+      }
+      else{
+        out->elements[4*i + j] = 0;
+      }
+    }
+  }
+
+  angle = -angle;
+  fxp32_16 cos = fxp_sin(32768 - angle, 20);
+  fxp32_16 sin = fxp_sin(angle, 20);
+  if(axis == 0){
+    out->elements[5] = cos;
+    out->elements[6] = sin;
+    out->elements[9] = -sin;
+    out->elements[10] = cos;
+  }
+  else if(axis == 1){
+    out->elements[0] = cos;
+    out->elements[2] = -sin;
+    out->elements[8] = sin;
+    out->elements[10] = cos;
+  }
+  else{
+    out->elements[0] = cos;
+    out->elements[1] = sin;
+    out->elements[4] = -sin;
+    out->elements[5] = cos;
+  }
 }
 //void Matrix_reflect(Matrix* out, Vector* line, fxp32_16 bias);
 void Matrix_translate(Matrix* out, Vector* path){
@@ -49,6 +82,4 @@ void Matrix_apply(Vector* out, Matrix* t, Vector* in){
     }
   }
 }
-void Matrix_changeBasis(Matrix* out, Vector* newX, Vector* newY, Vector* newZ, Vector* newOrigin){
-  
-}
+//void Matrix_changeBasis(Matrix* out, Vector* newX, Vector* newY, Vector* newZ, Vector* newOrigin){}

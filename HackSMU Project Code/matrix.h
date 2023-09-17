@@ -15,5 +15,5 @@ void Matrix_translate(Matrix* out, Vector* path);
 //void Matrix_shear(Matrix* out, Vector* newX, Vector* newY, Vector* newZ);
 
 void Matrix_apply(Vector* out, Matrix* t, Vector* in);
-void Matrix_changeBasis(Matrix* out, Vector* newX, Vector* newY, Vector* newZ, Vector* newOrigin);
+//void Matrix_changeBasis(Matrix* out, Vector* newX, Vector* newY, Vector* newZ, Vector* newOrigin);
 
