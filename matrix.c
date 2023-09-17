@@ -75,10 +75,10 @@ void Matrix_translate(Matrix* out, Vector* path){
 //void Matrix_shear(Matrix* out, Vector* newX, Vector* newY, Vector* newZ);
 
 void Matrix_apply(Vector* out, Matrix* t, Vector* in){
-  for(int i = 0; i < 3; i++){
+  for(int i = 0; i < 4; i++){
     out->a[i] = 0;
-    for(int j = 0; j < 4; i++){
-      out->a[i] += t->elements[4*i + j] * in->a[j];
+    for(int j = 0; j < 4; j++){
+      out->a[i] += fxp_mul(t->elements[4*i + j], in->a[j]);
     }
   }
 }
