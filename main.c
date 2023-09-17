@@ -35,20 +35,20 @@ int main()
 
     Matrix rotation;
     Matrix_rotate(&rotation, 32768/4, 2);
-
+    Vector points2[8];
     for(int i = 0; i < 8; i++){
-        Matrix_apply(&rotation, &rotation, &points[i]);
+        Matrix_apply(&(points2[i]), &rotation, &(points[i]));
     }
 
     for(int i = 0; i < 8; i++){
         //normalize points:
-        fxp_div(points[i].a[0], points[i].a[3]);
-        fxp_div(points[i].a[1], points[i].a[3]);
-        fxp_div(points[i].a[2], points[i].a[3]);
-        fxp_div(points[i].a[3], points[i].a[3]);
+        fxp_div(points2[i].a[0], points2[i].a[3]);
+        fxp_div(points2[i].a[1], points2[i].a[3]);
+        fxp_div(points2[i].a[2], points2[i].a[3]);
+        fxp_div(points2[i].a[3], points2[i].a[3]);
 
 
-        printf("(%d, %d, %d)\n", points[i].a[0], points[i].a[1], points[i].a[2]);
+        printf("(%d, %d, %d)\n", points2[i].a[0], points2[i].a[1], points2[i].a[2]);
     }
     
     return 0;
