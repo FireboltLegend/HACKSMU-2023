@@ -1,5 +1,6 @@
 #include "screen.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 static int pixelAddress(Screen* scr, fxp32_16 x, fxp32_16 y){
     return ((((scr->height * y) & (~65536)) * scr->width) + ((scr->height * x) & (~65535))) >> 16;

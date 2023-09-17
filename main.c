@@ -1,7 +1,7 @@
 #include "screen.h"
 #include "matrix.h"
 #include "camera.h"
-
+#include <stdio.h>
 
 
 int main()
