@@ -10,18 +10,45 @@ void Matrix_mul(Matrix* out, Matrix* a, Matrix* b, int rowa, int cola, int colb)
     }
   }
 }
-void Matrix_add(Matrix* out, Matrix* a, Matrix* b){
-  for(unsigned int i = 0;i < 16;i+=4){
-    for(unsigned int j = 0;j < 4;j++){
-        out->elements[i + j] = a->elements[i+j] + b->elements[i+j]; 
-      }
-  }//Is safe to use destructively
-void Matrix_neg(Matrix* out, Matrix* in);
+void Matrix_add(Matrix* out, Matrix* a, Matrix* b, int rows, int cols){
+  for(unsigned int i = 0; i < rows; i++)
+    for(unsigned int j = 0; j < cols; j++)
+      out->elements[4*i + j] = a->elements[4*i+j] + b->elements[4*i+j]; 
 
-void Matrix_rotation(Matrix* out, Vector* axis, fxp32_16 angle);
-void Matrix_reflect(Matrix* out, Vector* line, fxp32_16 bias);
-void Matrix_translate(Matrix* out, Vector* path);
-void Matrix_shear(Matrix* out, Vector* newX, Vector* newY, Vector* newZ);
+}//Is safe to use destructively
+void Matrix_neg(Matrix* out, Matrix* in, int rows, int cols){
+  for(unsigned int i = 0; i < rows; i++)
+    for(unsigned int j = 0; j < cols; j++)
+      out->elements[4*i + j] = -(in->elements[4*i+j]);
+}
 
-void Matrix_apply(Vector* out, Matrix* t, Vector* in);
-void Matrix_changeBasis(Matrix* out, Vector* newX, Vector* newY, Vector* newZ, Vector* newOrigin);
+void Matrix_rotation(Matrix* out, Vector* axis, fxp32_16 angle){
+
+}
+//void Matrix_reflect(Matrix* out, Vector* line, fxp32_16 bias);
+void Matrix_translate(Matrix* out, Vector* path){
+  for(int i = 0; i < 16; i++){
+    out->elements[i] = 0;
+  }
+  out->elements[0] = 65536;
+  out->elements[5] = 65536;
+  out->elements[10] = 65536;
+  out->elements[15] = 65536;
+
+  out->elements[3] = path->a[0];
+  out->elements[7] = path->a[1];
+  out->elements[11] = path->a[2];
+}
+//void Matrix_shear(Matrix* out, Vector* newX, Vector* newY, Vector* newZ);
+
+void Matrix_apply(Vector* out, Matrix* t, Vector* in){
+  for(int i = 0; i < 3; i++){
+    out->a[i] = 0;
+    for(int j = 0; j < 4; i++){
+      out->a[i] += t->elements[4*i + j] * in->a[j];
+    }
+  }
+}
+void Matrix_changeBasis(Matrix* out, Vector* newX, Vector* newY, Vector* newZ, Vector* newOrigin){
+  
+}
